@@ -1,0 +1,10 @@
+Challenge RootMe - App-systeme - ELF x86 - Stack buffer overflow basic 1
+
+En regardant le code nous nous apercevons que le buffer est de taille 40. Il faut donc écrire 40 caractères. Si l’on essaie on obtient la réponse  : ”You are on the right way”.
+
+En regardant le code on voit qu’il est nécessaire d’aller à l'adresse 0xdeadbeef, comm on utilise une architecture litte end on va devoir rajouter \xef\xbe\xad\xde après les 40 caractères afin d'overflow et de se rendre à cette adresse. On obtient la réponse “ Yeah dude! You win! Opening your shell… Shell closed! Bye.”
+
+Il faut donc maintenir le shell ouvert pour pouvoir exécuter des commandes dessus. Pour cela il nous suffit de le maintenir ouvert avec une commande comme cat : (python -c 'print "A"*40 +"\xef\xbe\xad\xde"' ;cat) | ./binary13 
+
+Nous pouvons ensuite obtenir le flag avec cat .passwd.
+
